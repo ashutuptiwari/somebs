@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Facial Emotion Recognition</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <h1>Facial Emotion Recognition</h1>
+    <div>
+        <img id="video_feed" src="{{ url_for('video_feed') }}">
+    </div>
+    <script>
+        $(document).ready(function() {
+            var refreshIntervalId = setInterval(function() {
+                $("#video_feed").attr("src", "{{ url_for('video_feed') }}?" + new Date().getTime());
+            }, 50);
+            $(window).on("beforeunload", function() {
+                clearInterval(refreshIntervalId);
+            });
+        });
+    </script>
+</body>
+</html>
